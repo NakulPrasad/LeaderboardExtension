@@ -1,0 +1,15 @@
+{
+    "manifest_version": 3,
+    "name": "BZ Leader Board",
+    "version": "1.0",
+    "description": "Simple Extension to manage Leaderboard",
+    "permissions": ["activeTab"],
+    "background": {
+      "service_worker": "background.js"
+    },
+    "action": {
+      "default_popup": "index.html"
+    }
+
+  }
+  
