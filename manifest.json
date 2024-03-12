@@ -9,7 +9,12 @@
     },
     "action": {
       "default_popup": "index.html"
-    }
-
+    },
+    "content_scripts": [
+        {
+          "matches": ["https://mentorpick.com/contest/*"],
+          "js": ["index.js"]
+        }
+     ]
   }
   
