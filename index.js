@@ -8,16 +8,31 @@ const arr = [];
 const arr1 = [];
 
 // Async function to fetch data from the provided URL
+
+function handleClickUrl() {
+    console.log("Clicked");
+    const inputElement = document.getElementById("inputUrl");
+    const inputValue = inputElement.value;
+    api_url = inputValue; // Update the API URL with the input value
+    console.log("New API URL:", api_url);
+    // Fetch data using the updated URL
+    getapi(api_url);
+}
+
+
+
+
+
 async function getapi(url) {
     try {
         // Fetch data from the URL
         const response = await fetch(url);
         // Convert response to text
         data = await response.text();
-        console.log(data);
         // Split data into lines
         const dataLines = data.split("\n");
-        
+        console.log(dataLines);
+
         // Process each line of data
         dataLines.forEach(line => {
             // Split line by comma and store values in arrays
@@ -25,7 +40,7 @@ async function getapi(url) {
             arr.push(value1);
             arr1.push(value2);
         });
-        
+
         // Select elements with class name "cursor leaderboard-MentorPickname rg_5"
         // // const MentorPickElements = document.getElementsByClassName("cursor leaderboard-MentorPickname rg_5");
         // const leaderboardEntries = document.querySelectorAll('.mantine-1avyp1d > div');
@@ -74,10 +89,13 @@ async function getapi(url) {
     }
 }
 
+
 // Function to add a new column to the leaderboard
-function addColumnToLeaderboard() {
+async function addColumnToLeaderboard() {
     // Find all leaderboard entries
-    const leaderboardEntries = document.querySelectorAll('#test-box > div.mantine-1avyp1d > div > div > div > div:nth-child(1)');
+
+
+    const leaderboardEntries = document.querySelectorAll('#test-box > div.mantine-1avyp1d > div > div > div >div');
     console.log(leaderboardEntries);
     // if (!leaderboardEntries.length) {
     //     console.error('Leaderboard entries not found.');
@@ -113,13 +131,18 @@ function addColumnToLeaderboard() {
     });
 }
 
+document.addEventListener("DOMContentLoaded", function () {
+
+    const submitButton = document.getElementById("submit");
+    submitButton.addEventListener("click", handleClickUrl);
+});
 
 // Initial data fetch
 getapi(api_url);
 
 // Listen for changes in page URL
 let currentPage = location.href;
-setInterval(function() {
+setInterval(function () {
     if (currentPage !== location.href) {
         // Page URL has changed, fetch data again
         currentPage = location.href;
